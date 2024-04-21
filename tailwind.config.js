@@ -3,6 +3,11 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      transitionTimingFunction: {
+        "in-expo": "cubic-bezier(0.95, 0.05, 0.795, 0.035)",
+        "out-expo": "cubic-bezier(0.19, 1, 0.22, 1)",
+        "custom-slide-right-to-left": "cubic-bezier(0.68, -0.55, 0.265, 1.55)",
+      },
       colors: {
         primary: "#1565D8",
         dark: {
