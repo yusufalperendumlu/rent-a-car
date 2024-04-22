@@ -3,7 +3,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { AiOutlineMenu, AiOutlineClose, AiOutlineLogin } from "react-icons/ai";
 import { clsx } from "clsx";
 
-import Login from "@/components/module/Login";
+import Login from "@/components/modal/Login";
 
 const NavItemInfo = [
   {
@@ -119,6 +119,7 @@ const NavItem = ({ item }) => {
 const Header = () => {
   const [navIsVisible, setNavIsVisible] = useState(false);
   const [LoginIsVisible, setLoginIsVisible] = useState(false);
+  // const loginRef = useRef(null);
 
   const navVisibilityHandler = () => {
     setNavIsVisible((curState) => {
@@ -132,13 +133,21 @@ const Header = () => {
     });
   };
 
+  // useEffect(() => {
+  //   const handleClickOutside = (e) => {
+  //     if (loginRef.current && !loginRef.current.contains(e.target)) {
+  //       setLoginIsVisible(false);
+  //     }
+  //   };
+  // });
+
   return (
-    <section className="sticky top-0 right-0 left-0 bg-dark-light z-50">
+    <section className="sticky top-0 right-0 left-0 h-fit bg-dark-light z-50">
       <header className="container mx-auto px-5 py-4 flex justify-between items-center">
         <h1 className="w-fit font-opensans font-bold text-left text-3xl text-white tracking-wider">
           re-cars
         </h1>
-        <div className="lg:hidden z-50">
+        <div className="lg:hidden">
           {navIsVisible ? (
             <AiOutlineClose
               className="w-6 h-6"
@@ -160,22 +169,33 @@ const Header = () => {
               <div className="flex">
                 <button
                   onClick={loginVisibilityHandler}
-                  className="flex items-center flex-nowrap gap-2 my-2 mx-4 hover:text-white transition-all duration-500 ease-linear relative group"
+                  className={clsx(
+                    "flex items-center flex-nowrap gap-2 my-2 mx-4 hover:text-white transition-all duration-500 ease-linear relative group",
+                    LoginIsVisible && "text-white"
+                  )}
                 >
                   <span className="">Login</span>
                   <AiOutlineLogin className="w-6 h-6" />
-                  <span className="text-blue-500 absolute right-0 top-0 opacity-0 transition-all duration-500 font-bold group-hover:opacity-100 group-hover:right-[100%] group-hover:mr-2">
+                  <span
+                    className={clsx(
+                      "text-blue-500 absolute right-0 top-0 opacity-0 transition-all duration-500 font-bold group-hover:opacity-100 group-hover:right-[100%] group-hover:mr-2 ",
+                      LoginIsVisible && "opacity-100 right-[100%] mr-2"
+                    )}
+                  >
                     /
                   </span>
                 </button>
+                <div className="absolute hidden top-14 right-0 lg:block group-hover">
+                  {LoginIsVisible && <Login />}
+                </div>
               </div>
             </div>
           </ul>
         </div>
       </header>
-      <div className="absolute top-auto right-12">
-        {LoginIsVisible && <Login />}
-      </div>
+      {LoginIsVisible && (
+        <div className="fixed top-0 left-0 w-full h-full  bg-black opacity-90 -z-40 transition-all duration-500 ease-linear"></div>
+      )}
     </section>
   );
 };
