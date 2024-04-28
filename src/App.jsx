@@ -5,7 +5,7 @@ import HomePage from "@/pages/home/HomePage";
 function App() {
   return (
     <>
-      <div className="h-screen w-full bg-slate-800">
+      <div className="overflow-x-hidden">
         <HomePage />
       </div>
     </>
