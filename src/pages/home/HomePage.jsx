@@ -1,15 +1,14 @@
 import MainLayout from "@/components/MainLayout";
 
+import Articles from "@/pages/home/container/Articles";
+import Hero from "@/pages/home/container/Hero";
+
 const HomePage = () => {
   return (
     <div>
       <MainLayout>
-        <div>
-          <h1 className="text-2xl font-bold text-center">Home</h1>
-          <div className="mt-4">
-            <p className="text-center">Welcome to the home page!</p>
-          </div>
-        </div>
+        <Hero />
+        <Articles />
       </MainLayout>
     </div>
   );
