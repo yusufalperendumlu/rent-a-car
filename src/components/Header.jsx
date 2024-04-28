@@ -102,7 +102,7 @@ const NavItem = ({ item }) => {
                   >
                     <a
                       href={subItem.link}
-                      className="block px-4 py-2 hover:bg-dark-soft hover:text-white transition-all duration-300 "
+                      className="block px-4 py-2 text-dark-soft hover:bg-dark-soft hover:text-white transition-all duration-300 "
                     >
                       {subItem.title}
                     </a>
