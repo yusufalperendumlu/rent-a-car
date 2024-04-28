@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { AiOutlineMenu, AiOutlineClose, AiOutlineLogin } from "react-icons/ai";
 import { clsx } from "clsx";
@@ -112,6 +112,9 @@ const NavItem = ({ item }) => {
           </div>
         </div>
       )}
+      {curState && (
+        <div className="fixed top-[4.5rem] left-0 w-full h-full  bg-black opacity-40 -z-40 transition-all duration-500 ease-linear"></div>
+      )}
     </li>
   );
 };
@@ -119,6 +122,16 @@ const NavItem = ({ item }) => {
 const Header = () => {
   const [navIsVisible, setNavIsVisible] = useState(false);
   const [LoginIsVisible, setLoginIsVisible] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const position = window.pageYOffset;
+      setScrollPosition(position);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [scrollPosition]);
   // const loginRef = useRef(null);
 
   const navVisibilityHandler = () => {
@@ -142,8 +155,20 @@ const Header = () => {
   // });
 
   return (
-    <section className="sticky top-0 right-0 left-0 h-fit bg-dark-light z-50">
-      <header className="container mx-auto px-5 py-4 flex justify-between items-center">
+    <section
+      className={clsx(
+        " w-screen h-fit z-50 transition-all duration-500 ease-in",
+        scrollPosition > 0
+          ? "fixed bg-dark-red top-0"
+          : "fixed bg-transparent top-0 left-0 shadow-md"
+      )}
+    >
+      <header
+        className={clsx(
+          "container mx-auto  py-4 flex justify-between items-center transition-all duration-500 ease-in-out",
+          scrollPosition > 0 ? "px-5" : "px-2"
+        )}
+      >
         <h1 className="w-fit font-opensans font-bold text-left text-3xl text-white tracking-wider">
           re-cars
         </h1>
@@ -161,7 +186,12 @@ const Header = () => {
           className={`transition-all duration-300 mt-[56px] lg:mt-0 bg-dark-hard lg:bg-transparent z-[49] flex flex-col w-full lg:w-auto justify-center lg:justify-end lg:flex-row fixed top-0 bottom-0 lg:static gap-x-9 items-center 
         ${navIsVisible ? "right-0" : "-right-full"}`}
         >
-          <ul className="text-white items-center gap-y-5 lg:text-dark-hard flex flex-col lg:flex-row gap-x-8 font-semibold">
+          <ul
+            className={clsx(
+              "items-center gap-y-5  flex flex-col lg:flex-row gap-x-8 font-semibold",
+              scrollPosition > 0 ? "text-white" : "lg:text-dark-hard text-white"
+            )}
+          >
             {NavItemInfo.map((item) => {
               return <NavItem key={item.name} item={item} />;
             })}
@@ -194,7 +224,7 @@ const Header = () => {
         </div>
       </header>
       {LoginIsVisible && (
-        <div className="fixed top-0 left-0 w-full h-full  bg-black opacity-90 -z-40 transition-all duration-500 ease-linear"></div>
+        <div className="fixed top-[4.5rem] left-0 w-full h-full  bg-black opacity-40 -z-40 transition-all duration-500 ease-linear"></div>
       )}
     </section>
   );
