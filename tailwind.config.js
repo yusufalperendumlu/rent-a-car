@@ -14,7 +14,7 @@ export default {
           light: "#5A7184",
           hard: "#0D2436",
           soft: "#183B56",
-          red: "rgba(252, 30, 30, 0.8)",
+          red: "rgba(252, 30, 30, 0.9)",
         },
         tooltip: "rgba(0, 32, 84, 0.12)",
       },
