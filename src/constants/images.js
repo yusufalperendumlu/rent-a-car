@@ -1,11 +1,21 @@
 import LogoImage from "@/assets/Logo.jpg";
 import HeroImage from "@/assets/HeroImage.jpg";
 import CharacterHead from "@/assets/character-head.jpg";
+import McQueen from "@/assets/McQueen14.jpg";
+import PistonCup from "@/assets/credits_head.jpg";
+import RacePhoto from "@/assets/trailer3.jpg";
+import RadiatorSprings from "@/assets/RadiatorSprings12.jpg";
+import Doc from "@/assets/Doc9.jpg";
 
 const images = {
   LogoImage,
   HeroImage,
   CharacterHead,
+  McQueen,
+  PistonCup,
+  RacePhoto,
+  RadiatorSprings,
+  Doc,
 };
 
 export default images;
