@@ -68,11 +68,7 @@ const Footer = () => {
           return <FooterItem key={index} item={item} />;
         })}
         <div className="col-span-10 md:order-first md:col-span-4 lg:col-span-2">
-          <img
-            src={images.Logo}
-            alt="logo"
-            className="brightness-0 invert mx-auto md:mx-0"
-          />
+          <img src={images.DocFooter} alt="logo" className="mx-auto md:mx-0" />
           <p className="text-sm text-dark-light text-center mt-4 md:text-left md:text-base lg:text-sm">
             Build a modern and creative website with crealand
           </p>
