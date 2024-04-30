@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { IoIosArrowDown, IoIosEye, IoIosEyeOff } from "react-icons/io";
 
 const Login = () => {
@@ -105,10 +106,10 @@ const Login = () => {
           <p className="p-2 text-xl font-semibold text-gray-200 text-center">
             Don&apos;t have an account?{" "}
           </p>
-          <span className="flex flex-nowrap items-center text-red-500 hover:text-red-600 transition-all duration-300 ease-in-out">
-            <a href="/" className="font-normal text-lg cursor-pointer">
+          <span className="flex flex-nowrap items-center cursor-pointer text-red-500 hover:text-red-600 transition-all duration-300 ease-in-out">
+            <Link to="/register" className="font-normal text-lg ">
               Sign up
-            </a>
+            </Link>
             <IoIosArrowDown className="rotate-[270deg] ml-2 mt-1" />
           </span>
         </div>

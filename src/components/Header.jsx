@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
 import { AiOutlineMenu, AiOutlineClose, AiOutlineLogin } from "react-icons/ai";
 import { clsx } from "clsx";
@@ -56,12 +57,14 @@ const NavItem = ({ item }) => {
         <>
           <a
             href={item.link}
-            className="px-4 py-2 hover:text-white transition-all duration-500 ease-linear cursor-pointer"
+            className={clsx(
+              "px-4 py-2 hover:text-white transition-all duration-500 ease-linear cursor-pointer"
+            )}
           >
             {item.name}
           </a>
-          <span className="text-blue-500 absolute right-0 top-0 opacity-0 transition-all duration-500 font-bold  cursor-pointer group-hover:opacity-100 group-hover:right-[90%]">
-            /
+          <span className="text-yellow-400 absolute right-0 top-0 opacity-0 transition-all duration-500 font-bold  cursor-pointer group-hover:opacity-100 group-hover:right-[90%]">
+            🗲
           </span>
         </>
       ) : (
@@ -157,21 +160,21 @@ const Header = () => {
   return (
     <section
       className={clsx(
-        " w-screen h-fit z-50 transition-all duration-500 ease-in",
-        scrollPosition > 0
-          ? "fixed bg-dark-red top-0"
-          : "fixed bg-transparent top-0 left-0 shadow-md"
+        " w-screen h-fit z-50 transition-all bg-dark-red  duration-500 ease-in",
+        scrollPosition > 0 ? "fixed top-0" : "fixed  top-0 left-0 shadow-md"
       )}
     >
       <header
         className={clsx(
-          "container mx-auto  py-4 flex justify-between items-center transition-all duration-500 ease-in-out",
+          "container mx-auto  py-4 flex justify-start items-center gap-x-16 transition-all duration-500 ease-in-out",
           scrollPosition > 0 ? "px-5" : "px-2"
         )}
       >
-        <h1 className="w-fit font-opensans font-bold text-left text-3xl text-white tracking-wider">
-          re-cars
-        </h1>
+        <Link to="/">
+          <h1 className="w-fit font-opensans font-bold text-left text-3xl text-white tracking-wider">
+            re-cars
+          </h1>
+        </Link>
         <div className="lg:hidden">
           {navIsVisible ? (
             <AiOutlineClose
@@ -188,8 +191,8 @@ const Header = () => {
         >
           <ul
             className={clsx(
-              "items-center gap-y-5  flex flex-col lg:flex-row gap-x-8 font-semibold",
-              scrollPosition > 0 ? "text-white" : "lg:text-dark-hard text-white"
+              "items-center gap-y-5  flex flex-col lg:flex-row gap-x-4 font-semibold",
+              scrollPosition > 0 ? "text-white" : "lg:text-white text-white"
             )}
           >
             {NavItemInfo.map((item) => {
@@ -197,6 +200,7 @@ const Header = () => {
             })}
             <div className="relative">
               <div className="flex">
+                <span className="px-4 flex items-center justify-center">|</span>
                 <button
                   onClick={loginVisibilityHandler}
                   className={clsx(
@@ -208,11 +212,11 @@ const Header = () => {
                   <AiOutlineLogin className="w-6 h-6" />
                   <span
                     className={clsx(
-                      "text-blue-500 absolute right-0 top-0 opacity-0 transition-all duration-500 font-bold group-hover:opacity-100 group-hover:right-[100%] group-hover:mr-2 ",
+                      "text-yellow-400 absolute right-0 top-0 opacity-0 transition-all duration-500 font-bold group-hover:opacity-100 group-hover:right-[100%] group-hover:mr-2 ",
                       LoginIsVisible && "opacity-100 right-[100%] mr-2"
                     )}
                   >
-                    /
+                    🗲
                   </span>
                 </button>
                 <div className="absolute hidden top-14 right-0 lg:block group-hover">

@@ -2,7 +2,7 @@ import { images } from "@/constants";
 
 const CTA = () => {
   return (
-    <section className="relative px-5 py-20">
+    <section className="relative px-5 py-16">
       <div
         className="absolute bg-fixed inset-0 z-[-1]"
         style={{
@@ -13,7 +13,7 @@ const CTA = () => {
         }}
       />
 
-      <div className="container grid grid-cols-12 mx-auto py-10 md:pb-20 lg:place-items-center">
+      <div className="container grid grid-cols-12 mx-auto py-10 mt-20 md:pb-20 lg:place-items-center">
         <div className="col-span-12 lg:col-span-6">
           <h2 className="text-white font-roboto font-bold text-2xl md:text-4xl md:text-center md:leading-normal lg:text-left">
             Get our stories delivered From us to your inbox weekly.
