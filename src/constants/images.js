@@ -6,6 +6,8 @@ import PistonCup from "@/assets/credits_head.jpg";
 import RacePhoto from "@/assets/trailer3.jpg";
 import RadiatorSprings from "@/assets/RadiatorSprings12.jpg";
 import Doc from "@/assets/Doc9.jpg";
+import DocFooter from "@/assets/Doc10.jpg";
+import LuigiGuido from "@/assets/LuigiGuido8.jpg";
 
 const images = {
   LogoImage,
@@ -16,6 +18,8 @@ const images = {
   RacePhoto,
   RadiatorSprings,
   Doc,
+  DocFooter,
+  LuigiGuido,
 };
 
 export default images;
