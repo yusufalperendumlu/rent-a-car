@@ -17,6 +17,9 @@ export default {
           red: "rgba(252, 30, 30, 0.9)",
         },
         tooltip: "rgba(0, 32, 84, 0.12)",
+        off: {
+          white: "#fff8",
+        },
       },
       fontFamily: {
         opensans: ["'Open Sans'", "sans-serif"],
