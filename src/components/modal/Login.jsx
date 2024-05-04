@@ -107,10 +107,13 @@ const Login = () => {
             Don&apos;t have an account?{" "}
           </p>
           <span className="flex flex-nowrap items-center cursor-pointer text-red-500 hover:text-red-600 transition-all duration-300 ease-in-out">
-            <Link to="/register" className="font-normal text-lg ">
+            <Link
+              to="/register"
+              className="font-normal text-lg flex flex-nowrap"
+            >
               Sign up
+              <IoIosArrowDown className="rotate-[270deg] ml-2 mt-1" />
             </Link>
-            <IoIosArrowDown className="rotate-[270deg] ml-2 mt-1" />
           </span>
         </div>
       </div>
