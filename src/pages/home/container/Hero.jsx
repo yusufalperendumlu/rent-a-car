@@ -1,7 +1,6 @@
 import { useState } from "react";
 import DatePicker from "react-datepicker";
-import { FaChevronDown } from "react-icons/fa";
-import { IoClose } from "react-icons/io5";
+import { IoClose, IoChevronDown } from "react-icons/io5";
 
 import { MdOutlineMyLocation } from "react-icons/md";
 
@@ -162,7 +161,7 @@ const Hero = () => {
               onClick={() => setCoupon(true)}
             >
               <p className="text-white  uppercase text-sm">discount number</p>
-              <FaChevronDown className="text-white rotate-[270deg]" />
+              <IoChevronDown className="text-white rotate-[270deg]" />
             </div>
           )}
           <div>
