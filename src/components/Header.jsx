@@ -166,7 +166,7 @@ const Header = () => {
     >
       <header
         className={clsx(
-          "container mx-auto  py-4 flex justify-start items-center gap-x-16 transition-all duration-500 ease-in-out",
+          "container mx-auto  py-4 flex items-center justify-between gap-x-16 transition-all duration-500 ease-in-out",
           scrollPosition > 0 ? "px-5" : "px-2"
         )}
       >
@@ -208,7 +208,7 @@ const Header = () => {
                     LoginIsVisible && "text-white"
                   )}
                 >
-                  <span className="">Login</span>
+                  <span>Login</span>
                   <AiOutlineLogin className="w-6 h-6" />
                   <span
                     className={clsx(
