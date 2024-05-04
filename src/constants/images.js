@@ -8,6 +8,7 @@ import RadiatorSprings from "@/assets/RadiatorSprings12.jpg";
 import Doc from "@/assets/Doc9.jpg";
 import DocFooter from "@/assets/Doc10.jpg";
 import LuigiGuido from "@/assets/LuigiGuido8.jpg";
+import LuigiGuido2 from "@/assets/LuigiGuido10.jpg";
 
 const images = {
   LogoImage,
@@ -20,6 +21,7 @@ const images = {
   Doc,
   DocFooter,
   LuigiGuido,
+  LuigiGuido2,
 };
 
 export default images;
