@@ -28,7 +28,7 @@ const Hero = () => {
           Now
           <p>It&apos;s easy for you rent a car</p>
         </h1>
-        <p className="text-dark-light mt-4 text-center md:text-lg lg:text-base xl:text-xl lg:text-left">
+        <p className="text-[#ffffff] mt-4 text-center md:text-lg lg:text-base xl:text-xl lg:text-left">
           A small river named Duden flows by their place and supplies it with
           the necessary regelialia. It is a paradisematic country, in which
           roasted parts of sentences fly into your mouth.

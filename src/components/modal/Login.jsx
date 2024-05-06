@@ -1,9 +1,17 @@
-import clsx from "clsx";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { Link, useNavigate } from "react-router-dom";
 import { IoIosArrowDown, IoIosEye, IoIosEyeOff } from "react-icons/io";
+import { toast } from "react-toastify";
+import clsx from "clsx";
+
+import { signIn } from "@/services/index/users";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
 
@@ -13,6 +21,48 @@ const Login = () => {
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
+  };
+
+  const { mutate, isLoading } = useMutation({
+    mutationFn: ({ email, password }) => {
+      return signIn({ email, password });
+    },
+    onSuccess: (data) => {
+      localStorage.setItem("account", JSON.stringify(data));
+      Swal.fire({
+        icon: "success",
+        title: "Login Successful",
+        text: "You have successfully logged in",
+      });
+      navigate("/");
+    },
+    onError: (error) => {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: error.message,
+        confirmButtonText: "OK",
+      });
+    },
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+    // reset,
+  } = useForm({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+
+    mode: "onChange",
+  });
+
+  const submitHandler = (data) => {
+    const { email, password } = data;
+    mutate({ email, password });
   };
 
   return (
@@ -25,7 +75,7 @@ const Login = () => {
           You can log in with your{" "}
           <span className="text-red-500">Individual Account</span>
         </h1>
-        <form className="mt-8">
+        <form className="mt-8" onSubmit={handleSubmit(submitHandler)}>
           <div className="mb-4">
             <label
               htmlFor="email"
@@ -37,6 +87,13 @@ const Login = () => {
               type="email"
               id="email"
               name="email"
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
+                  message: "Invalid email format",
+                },
+              })}
               placeholder="E-Mail Address"
               className="mt-2 block w-full h-12 px-3 py-2 border-none bg-dark-light rounded-md text-lg font-bold shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm focus:bg-white transition-all duration-200 ease-linear"
             />
@@ -63,12 +120,20 @@ const Login = () => {
               type={showPassword ? "text" : "password"}
               id="password"
               name="password"
+              {...register("password", {
+                required: "Password is required",
+                minLength: {
+                  value: 6,
+                  message: "Password must be at least 6 characters",
+                },
+              })}
               value={password}
               onChange={handlePasswordChange}
               placeholder="Password"
               className={clsx(
-                "relative mt-2 block w-full h-12 px-3 py-2 border-none bg-dark-light rounded-md text-lg font-bold shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm focus:bg-white transition-all duration-200 ease-linear ",
-                { "bg-white": !!password }
+                "relative block w-full h-12 px-3 py-2 border-none bg-dark-light rounded-md text-lg font-bold shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm focus:bg-white transition-all duration-200 ease-linear ",
+                { "bg-white": !!password },
+                errors.password ? "mt-10" : "mt-2"
               )}
             />
             <button
@@ -96,6 +161,7 @@ const Login = () => {
             </div>
             <button
               type="submit"
+              disabled={!isValid || isLoading}
               className="w-1/2 py-2 border border-transparent rounded-full shadow-sm text-sm font-medium text-white bg-red-500 hover:bg-red-700 transition-all duration-300 ease-linear focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Login
