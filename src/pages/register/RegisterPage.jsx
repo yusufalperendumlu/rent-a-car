@@ -36,7 +36,7 @@ const RegisterPage = () => {
 
   const handleCloseConfirmed = () => {
     setIsConfirmedOpen(false);
-    navigate("/");
+    navigate("/verifyEmail");
   };
 
   const handleCloseError = () => {
