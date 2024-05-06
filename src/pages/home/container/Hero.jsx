@@ -23,7 +23,7 @@ const Hero = () => {
           className="object-cover object-center h-full w-full"
         />
       </div>
-      <div className="mt-10 lg:w-1/2 z-40 ">
+      <div className="lg:w-1/2 z-40 ">
         <h1 className="font-roboto text-3xl text-center font-normal text-white md:text-5xl lg:text-4xl xl:text-5xl lg:text-left lg:max-w-[540px]">
           Now
           <p>It&apos;s easy for you rent a car</p>
