@@ -15,7 +15,7 @@ const Hero = () => {
   const [coupon, setCoupon] = useState(false);
 
   return (
-    <section className="container mx-auto flex flex-col px-5 py-5 mt-60 lg:flex-row overflow-x-hidden">
+    <section className="container mx-auto flex flex-nowrap justify-between px-5 py-5 mt-60 lg:flex-row overflow-x-hidden">
       <div className="fixed inset-0 z-[-1]">
         <img
           src={images.HeroImage}
@@ -34,7 +34,7 @@ const Hero = () => {
           roasted parts of sentences fly into your mouth.
         </p>
       </div>
-      <div className="w-full lg:ml-2 lg:1/2 flex items-center justify-center flex-wrap flex-col lg:mt-0 z-40">
+      <div className="w-fit lg:ml-2 lg:1/2 flex items-center justify-end flex-wrap flex-col lg:mt-0 z-40">
         <div className="px-2 py-3 pr-8 bg-dark-light">
           <div className="text-nowrap text-white px-4">
             <h1>Make Your Trip</h1>
