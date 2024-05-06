@@ -9,6 +9,7 @@ import Doc from "@/assets/Doc9.jpg";
 import DocFooter from "@/assets/Doc10.jpg";
 import LuigiGuido from "@/assets/LuigiGuido8.jpg";
 import LuigiGuido2 from "@/assets/LuigiGuido10.jpg";
+import Cars2England from "@/assets/c2_credits.jpg";
 
 const images = {
   LogoImage,
@@ -22,6 +23,7 @@ const images = {
   DocFooter,
   LuigiGuido,
   LuigiGuido2,
+  Cars2England,
 };
 
 export default images;
