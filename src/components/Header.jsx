@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
 import { AiOutlineMenu, AiOutlineClose, AiOutlineLogin } from "react-icons/ai";
 import { clsx } from "clsx";
@@ -123,6 +123,8 @@ const NavItem = ({ item }) => {
 };
 
 const Header = () => {
+  const navigate = useNavigate();
+  const [profileDropdown, setProfileDropdown] = useState(false);
   const [navIsVisible, setNavIsVisible] = useState(false);
   const [LoginIsVisible, setLoginIsVisible] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -149,13 +151,9 @@ const Header = () => {
     });
   };
 
-  // useEffect(() => {
-  //   const handleClickOutside = (e) => {
-  //     if (loginRef.current && !loginRef.current.contains(e.target)) {
-  //       setLoginIsVisible(false);
-  //     }
-  //   };
-  // });
+  const logoutHandler = () => {
+    localStorage.removeItem("account");
+  };
 
   return (
     <section
@@ -201,24 +199,62 @@ const Header = () => {
             <div className="relative">
               <div className="flex">
                 <span className="px-4 flex items-center justify-center">|</span>
-                <button
-                  onClick={loginVisibilityHandler}
-                  className={clsx(
-                    "flex items-center flex-nowrap gap-2 my-2 mx-4 hover:text-white transition-all duration-500 ease-linear relative group",
-                    LoginIsVisible && "text-white"
-                  )}
-                >
-                  <span>Login</span>
-                  <AiOutlineLogin className="w-6 h-6" />
-                  <span
+                {localStorage.getItem("account") ? (
+                  <div className="text-white items-center gap-y-5 lg:text-dark-soft flex flex-col lg:flex-row gap-x-3 font-semibold">
+                    <div className="relative group">
+                      <div className="flex flex-col items-center">
+                        <p className="flex cursor-pointer gap-x-1 items-center  mt-5 lg:mt-0 border-2 border-blue-500 px-6 py-2 rounded-full text-blue-500 font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300">
+                          <span>Account</span>
+                          <IoIosArrowDown
+                            onClick={() => setProfileDropdown(!profileDropdown)}
+                          />
+                        </p>
+                        <div
+                          className={clsx(
+                            "lg:hidden transition-all duration-500 pt-4 absolute bottom-0 right-0 transform translate-y-full  w-max lg:group-hover:block z-50 opacity-100",
+                            profileDropdown ? "hidden" : "block"
+                          )}
+                        >
+                          <ul className="flex flex-col z-50 bg-dark-hard lg:bg-white shadow-lg rounded-lg overflow-hidden ">
+                            <button
+                              type="button"
+                              onClick={() => navigate("/profile")}
+                              className="hover:bg-dark-hard hover:text-white px-4 py-2 text-white lg:text-dark-hard"
+                            >
+                              Profile Page
+                            </button>
+                            <button
+                              onClick={logoutHandler}
+                              type="button"
+                              className="hover:bg-dark-hard hover:text-white px-4 py-2 text-white lg:text-dark-hard"
+                            >
+                              Logout
+                            </button>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <button
+                    onClick={loginVisibilityHandler}
                     className={clsx(
-                      "text-yellow-400 absolute right-0 top-0 opacity-0 transition-all duration-500 font-bold group-hover:opacity-100 group-hover:right-[100%] group-hover:mr-2 ",
-                      LoginIsVisible && "opacity-100 right-[100%] mr-2"
+                      "flex items-center flex-nowrap gap-2 my-2 mx-4 hover:text-white transition-all duration-500 ease-linear relative group",
+                      LoginIsVisible && "text-white"
                     )}
                   >
-                    🗲
-                  </span>
-                </button>
+                    <span>Login</span>
+                    <AiOutlineLogin className="w-6 h-6" />
+                    <span
+                      className={clsx(
+                        "text-yellow-400 absolute right-0 top-0 opacity-0 transition-all duration-500 font-bold group-hover:opacity-100 group-hover:right-[100%] group-hover:mr-2 ",
+                        LoginIsVisible && "opacity-100 right-[100%] mr-2"
+                      )}
+                    >
+                      🗲
+                    </span>
+                  </button>
+                )}
                 <div className="absolute hidden top-14 right-0 lg:block group-hover">
                   {LoginIsVisible && <Login />}
                 </div>
