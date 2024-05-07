@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { Link, useNavigate } from "react-router-dom";
 import { IoIosArrowDown, IoIosEye, IoIosEyeOff } from "react-icons/io";
-import { toast } from "react-toastify";
 import clsx from "clsx";
 
 import { signIn } from "@/services/index/users";
@@ -177,8 +176,8 @@ const Login = () => {
               to="/register"
               className="font-normal text-lg flex flex-nowrap"
             >
-              Sign up
-              <IoIosArrowDown className="rotate-[270deg] ml-2 mt-1" />
+              Register
+              <IoIosArrowDown className="rotate-[270deg] h-4 w-4 ml-1 mt-1.5" />
             </Link>
           </span>
         </div>
