@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
+import { Input } from "antd";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Swal from "sweetalert2";
 
@@ -129,7 +130,7 @@ const VerifyEmailPage = () => {
                   >
                     Your confirmation code
                   </label>
-                  <input
+                  <Input.OTP
                     type="text"
                     name="userVerifyCode"
                     id="userVerifyCode"
@@ -140,8 +141,9 @@ const VerifyEmailPage = () => {
                         message: "Please enter a valid verification code",
                       },
                     })}
-                    maxLength={6}
-                    className="w-full h-12 border-b-2 bg-transparent m-2 outline-none text-center font-semibold text-xl spin-button-none border-gray-900 focus:border-slate-800 focus:text-gray-700 text-gray-900 transition [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                    length={6}
+                    variant="filled"
+                    size="large"
                   />
                   {errors.userVerifyCode && (
                     <p className="text-red-500 px-4 py-3">
