@@ -1,10 +1,10 @@
 import { useState } from "react";
-import DatePicker from "react-datepicker";
+
+import { DatePicker, TimePicker } from "antd";
 import { IoClose, IoChevronDown } from "react-icons/io5";
 
 import { MdOutlineMyLocation } from "react-icons/md";
 
-import "react-datepicker/dist/react-datepicker.css";
 import { images } from "@/constants";
 
 const Hero = () => {
@@ -65,22 +65,22 @@ const Hero = () => {
               </span>
               <div className="w-80 flex flex-nowrap ">
                 <DatePicker
-                  className="block w-full px-4 py-2 mt-2 text-white bg-dark-hard border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 "
+                  className="block w-fit px-4 py-2 mt-2  border-gray-300 rounded-md focus:outline-none focus:border-blue-500 "
                   selected={startDate}
                   onChange={(date) => setStartDate(date)}
                   placeholderText="Select Date"
-                  locale={"en"}
-                  dateFormat="dd EEE MMM"
+                  format={"MM.DD.YYYY"}
                 />
-                <DatePicker
-                  className="block w-full px-4 py-2 mt-2 ml-2 text-white bg-dark-hard  border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                <TimePicker
+                  className="block w-fit px-4 py-2 mt-2 ml-2  border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 "
                   selected={startTime}
                   placeholderText="Select Time"
                   onChange={(date) => setStartTime(date)}
-                  showTimeSelect
-                  showTimeSelectOnly
-                  timeCaption="Time"
-                  dateFormat="h:mm aa"
+                  needConfirm={false}
+                  changeOnScroll
+                  format={"h:mm A"}
+                  minuteStep={15}
+                  use12Hours
                 />
               </div>
             </div>
@@ -111,7 +111,7 @@ const Hero = () => {
               </span>
               <div className="w-80 flex flex-nowrap">
                 <DatePicker
-                  className="block w-full px-4 py-2 mt-2 text-white bg-dark-hard border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 "
+                  className="block w-fit px-4 py-2 mt-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 "
                   selectsEnd
                   selected={endDate}
                   onChange={(date) => setEndDate(date)}
@@ -119,18 +119,18 @@ const Hero = () => {
                   startDate={startDate}
                   minDate={startDate}
                   placeholderText="Select Date"
-                  locale={"en"}
-                  dateFormat="dd EEE MMM "
+                  format={"MM.DD.YYYY"}
                 />
-                <DatePicker
-                  className="block w-full px-4 py-2 mt-2 ml-2 text-white bg-dark-hard  border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 "
+                <TimePicker
+                  className="block w-fit px-4 py-2 mt-2 ml-2  border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 "
                   selected={endTime}
                   onChange={(date) => setEndTime(date)}
                   placeholderText="Select Time"
-                  showTimeSelect
-                  showTimeSelectOnly
-                  timeCaption="Time"
-                  dateFormat="H : mm"
+                  needConfirm={false}
+                  changeOnScroll
+                  format={"h:mm A"}
+                  minuteStep={15}
+                  use12Hours
                 />
               </div>
             </div>
