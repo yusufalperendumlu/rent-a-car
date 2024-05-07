@@ -95,7 +95,7 @@ const Login = () => {
                 },
               })}
               placeholder="E-Mail Address"
-              className="mt-2 block w-full h-12 px-3 py-2 border-none bg-dark-light rounded-md text-lg font-bold shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm focus:bg-white transition-all duration-200 ease-linear"
+              className="mt-2 block w-full h-12 text-white focus:text-dark-hard px-3 py-2 border-none bg-dark-light rounded-md text-lg font-bold shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm focus:bg-white transition-all duration-200 ease-linear"
             />
           </div>
           <div className="mb-4">
@@ -131,8 +131,8 @@ const Login = () => {
               onChange={handlePasswordChange}
               placeholder="Password"
               className={clsx(
-                "relative block w-full h-12 px-3 py-2 border-none bg-dark-light rounded-md text-lg font-bold shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm focus:bg-white transition-all duration-200 ease-linear ",
-                { "bg-white": !!password },
+                "relative block w-full h-12 px-3 py-2 border-none text-white focus:text-dark-hard bg-dark-light rounded-md text-lg font-bold shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm focus:bg-white transition-all duration-200 ease-linear ",
+                { "bg-dark-hard": !!password },
                 errors.password ? "mt-10" : "mt-2"
               )}
             />
