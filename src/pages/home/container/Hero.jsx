@@ -142,17 +142,17 @@ const Hero = () => {
               <input
                 type="text"
                 placeholder="Discount number"
-                className="relative w-full px-4 py-2 rounded-lg bg-white  border-white text-dark-hard focus:outline-none"
+                className="relative w-full px-4 py-2 rounded-lg bg-white uppercase  border-white text-dark-hard focus:outline-none"
               />
-              <button className="bg-red-500 px-4 py-2 rounded-md text-white font-normal">
-                APPROVE
-              </button>
               <button
                 onClick={() => setCoupon(false)}
                 className="text-white flex flex-nowrap items-center gap-2 cursor-pointer text-xs"
               >
                 CANCEL
                 <IoClose className="w-5 h-5" />
+              </button>
+              <button className="bg-red-500 px-4 py-2 rounded-md text-white font-normal">
+                APPROVE
               </button>
             </div>
           ) : (
