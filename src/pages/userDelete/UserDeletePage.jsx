@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { Input } from "antd";
 import { useForm } from "react-hook-form";
@@ -6,37 +6,23 @@ import { useNavigate } from "react-router-dom";
 
 import Swal from "sweetalert2";
 
-import { verifyEmail, sendEmailAgain } from "@/services/index/users";
+import { deleteUser } from "@/services/index/users";
+
 import { images } from "@/constants";
 
-const getEmailFromLocalStorage = () => {
-  const storedData = localStorage.getItem("account");
-  if (storedData) {
-    const accountData = JSON.parse(storedData);
-    return accountData.data.email;
-  }
-  return "";
-};
-
-const VerifyEmailPage = () => {
-  const [userEmail, setUserEmail] = useState("");
+const UserDeletePage = () => {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const emailFromStorage = getEmailFromLocalStorage();
-    setUserEmail(emailFromStorage);
-  }, []);
+  const [userId, setUserId] = useState("");
 
   const { mutate, isLoading } = useMutation({
-    mutationFn: ({ email, userVerifyCode }) => {
-      return verifyEmail({ email, userVerifyCode });
+    mutationFn: ({ userId, password }) => {
+      return deleteUser(userId, password);
     },
-
     onSuccess: () => {
       Swal.fire({
         icon: "success",
-        title: "Email verified",
-        text: "You have successfully verified your email address",
+        title: "Success",
+        text: "Your account has been successfully deleted",
         confirmButtonText: "OK",
         confirmButtonColor: "#B22222",
       }).then(() => {
@@ -46,9 +32,8 @@ const VerifyEmailPage = () => {
     onError: (error) => {
       Swal.fire({
         icon: "error",
-        title: "Error",
+        title: "Oops...",
         text: error.message,
-        confirmButtonText: "OK",
       });
     },
   });
@@ -59,43 +44,15 @@ const VerifyEmailPage = () => {
     formState: { errors, isValid },
   } = useForm({
     defaultValues: {
-      email: userEmail,
-      userVerifyCode: "",
+      password: "",
     },
+
     mode: "onChange",
   });
 
   const submitHandler = (data) => {
-    const { userVerifyCode } = data;
-    mutate({ email: userEmail, userVerifyCode });
-  };
-
-  const { mutate: resendVerificationEmail, isLoading: isResending } =
-    useMutation({
-      mutationFn: () => {
-        return sendEmailAgain({ email: userEmail });
-      },
-      onSuccess: () => {
-        Swal.fire({
-          icon: "success",
-          title: "Email resent",
-          text: "Verification email has been resent successfully",
-          confirmButtonText: "OK",
-          confirmButtonColor: "#B22222",
-        });
-      },
-      onError: (error) => {
-        Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: error.message,
-          confirmButtonText: "OK",
-        });
-      },
-    });
-
-  const handleResendVerificationEmail = () => {
-    resendVerificationEmail();
+    const { password } = data;
+    mutate({ userId, password });
   };
 
   return (
@@ -118,49 +75,36 @@ const VerifyEmailPage = () => {
                 <div className="text-center">
                   <p className="text-base font-light">
                     We&apos;ve sent a six-digit confirmation code to
-                    <span className="font-semibold">{` ${userEmail}`}</span>. It
+                    <span className="font-semibold">{` ${userId}`}</span>. It
                     will expire shortly, so enter your code soon.
                   </p>
-                  <p></p>
                 </div>
                 <div className="w-full flex flex-col mt-8">
                   <label
-                    htmlFor="userVerifyCode"
+                    htmlFor="verificationCode"
                     className="font-bold text-sm px-4 py-3"
                   >
                     Your confirmation code
                   </label>
-                  <input
+                  <Input.Password
                     type="text"
-                    name="userVerifyCode"
-                    id="userVerifyCode"
-                    {...register(`userVerifyCode`, {
+                    name="password"
+                    id="password"
+                    {...register(`verificationCode`, {
                       required: "Please enter the verification code",
                       maxLength: {
                         value: 6,
                         message: "Please enter a valid verification code",
                       },
                     })}
-                    maxLength={6}
-                    className="w-full h-12 border-b-2 bg-transparent m-2 outline-none text-center font-semibold text-xl spin-button-none border-gray-900 focus:border-slate-800 focus:text-gray-700 text-gray-900 transition [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                    variant="filled"
+                    size="large"
                   />
-                  {errors.userVerifyCode && (
+                  {errors.password && (
                     <p className="text-red-500 px-4 py-3">
-                      {errors.userVerifyCode.message}
+                      {errors.verificationCode.message}
                     </p>
                   )}
-                </div>
-                <div className="flex items-center justify-center mt-8 space-x-4 text-center">
-                  <p className="text-xs text-gray-500 text-center">
-                    Didn&apos;t receive the code?{" "}
-                    <a
-                      aria-disabled={isResending}
-                      onClick={handleResendVerificationEmail}
-                      className="text-blue-500 underline cursor-pointer"
-                    >
-                      Resend code
-                    </a>
-                  </p>
                 </div>
               </div>
               <div className="flex items-center justify-end px-4 pb-12">
@@ -180,4 +124,4 @@ const VerifyEmailPage = () => {
   );
 };
 
-export default VerifyEmailPage;
+export default UserDeletePage;

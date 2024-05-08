@@ -77,3 +77,50 @@ export const sendEmailAgain = async ({ email }) => {
     throw new Error(error.message);
   }
 };
+
+export const getUserProfile = async ({ token }) => {
+  try {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const { data } = await axios.get(
+      "http://localhost:1903/api/user/getUserById",
+      config
+    );
+    return data;
+  } catch (error) {
+    if (error.response && error.response.data.message) {
+      throw new Error(error.response.data.message);
+    }
+
+    throw new Error(error.message);
+  }
+};
+
+// export const deleteUser = async ({ userId, password, token }) => {
+//   try {
+//     const config = {
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//       },
+//     };
+
+//     const { data } = await axios.delete(
+//       "http://localhost:1903/api/user/deleteUser",
+//       {
+//         config,
+//       }
+//     );
+
+//     return data;
+//   } catch (error) {
+//     if (error.response && error.response.data.message) {
+//       throw new Error(error.response.data.message);
+//     }
+
+//     throw new Error(error.message);
+//   }
+// };

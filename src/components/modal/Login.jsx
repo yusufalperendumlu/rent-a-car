@@ -97,6 +97,13 @@ const Login = () => {
               className="mt-2 block w-full h-12 text-white focus:text-dark-hard px-3 py-2 border-none bg-dark-light rounded-md text-lg font-bold shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm focus:bg-white transition-all duration-200 ease-linear"
             />
           </div>
+          <div className={clsx("h-4 w-full flex")}>
+            {errors.email && (
+              <p className="text-red-500 text-xs -mt-1">
+                {errors.email.message}
+              </p>
+            )}
+          </div>
           <div className="mb-4">
             <div className="flex items-center justify-between">
               <label
@@ -105,15 +112,6 @@ const Login = () => {
               >
                 Password*
               </label>
-              <div className="flex justify-end">
-                <a
-                  href="/"
-                  className="text-xs font-light text-gray-200  transition-all duration-300 ease-in-out"
-                >
-                  Forgot My Password?
-                </a>
-                <IoIosArrowDown className="rotate-[270deg] text-gray-200 text-sm ml-2" />
-              </div>
             </div>
             <input
               type={showPassword ? "text" : "password"}
@@ -138,11 +136,19 @@ const Login = () => {
             <button
               type="button"
               onClick={togglePasswordVisibility}
-              className="absolute -inset-y-0 end-0 mr-16 text-2xl mt-3 rounded-e-md text-gray-400"
+              className="absolute w-fit h-fit inset-y-[18.4rem] end-0 mr-16 text-2xl mt-3 rounded-e-md text-gray-400"
             >
               {showPassword ? <IoIosEyeOff /> : <IoIosEye />}
             </button>
+            <div className="h-4 w-full flex">
+              {errors.password && (
+                <p className="text-red-500 text-xs -mt-1">
+                  {errors.password.message}
+                </p>
+              )}
+            </div>
           </div>
+
           <div className="w-full flex justify-between items-center mt-8">
             <div className="flex items-center">
               <input
@@ -158,26 +164,37 @@ const Login = () => {
                 Remember me
               </label>
             </div>
+            <div className="flex justify-end">
+              <a
+                href="/"
+                className="text-xs font-light text-gray-200  transition-all duration-300 ease-in-out"
+              >
+                Forgot My Password?
+              </a>
+              <IoIosArrowDown className="rotate-[270deg] text-gray-200 text-sm ml-2" />
+            </div>
+          </div>
+          <div className="w-full flex items-center justify-end mt-8">
             <button
               type="submit"
               disabled={!isValid || isLoading}
-              className="w-1/2 py-2 border border-transparent rounded-full shadow-sm text-sm font-medium text-white bg-red-500 hover:bg-red-700 transition-all duration-300 ease-linear focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="w-1/2 py-2 cursor-pointer border border-transparent rounded-full shadow-sm text-sm font-medium text-white bg-red-500 hover:bg-red-700 transition-all duration-300 ease-linear focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Login
             </button>
           </div>
         </form>
-        <div className="flex items-center justify-center bg-dark-light mt-12 rounded-sm flex-wrap p-4 ">
-          <p className="p-2 text-xl font-semibold text-gray-200 text-center">
+        <div className="flex flex-col items-center justify-center bg-dark-light mt-8 rounded-sm flex-wrap p-2 ">
+          <p className="p-2 text-base font-semibold text-gray-200 text-center">
             Don&apos;t have an account?{" "}
           </p>
           <span className="flex flex-nowrap items-center cursor-pointer text-red-500 hover:text-red-600 transition-all duration-300 ease-in-out">
             <Link
               to="/register"
-              className="font-normal text-lg flex flex-nowrap"
+              className="font-normal text-sm flex flex-nowrap"
             >
               Register
-              <IoIosArrowDown className="rotate-[270deg] h-4 w-4 ml-1 mt-1.5" />
+              <IoIosArrowDown className="rotate-[270deg] h-3 w-3 ml-1 mt-1" />
             </Link>
           </span>
         </div>

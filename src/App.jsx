@@ -16,7 +16,9 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/verifyEmail" element={<VerifyEmailPage />} />
           <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/rent/1" element={<CarsShow />} />
+          <Route path="/listcars/:officename" element={<CarsShow />} />
+
+          {/* <Route path="/userDelete" element={<UserDeletePage />} /> */}
         </Routes>
       </div>
     </>

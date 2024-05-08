@@ -68,12 +68,6 @@ const RegisterPage = () => {
     mutate({ firstname, lastname, email, password });
   };
 
-  // const registerControl = () => {
-  //   if (isValid) {
-  //     navigate("/");
-  //   }
-  // };
-
   return (
     <MainLayout>
       <section className="container  mx-auto px-5 mt-52">
