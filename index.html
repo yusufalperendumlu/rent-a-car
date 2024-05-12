@@ -11,6 +11,21 @@
 <body>
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
+  <script>
+    window.onload = function () {
+      let pageTitle = document.title;
+      let attentionMessage = "KA - CIAO";
+      document.addEventListener('visibilitychange', (e) => {
+        let isPageActive = !document.hidden;
+
+        if (!isPageActive) {
+          document.title = attentionMessage;
+        } else {
+          document.title = pageTitle;
+        }
+      })
+    }
+  </script>
 </body>
 
 </html>
