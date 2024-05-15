@@ -42,7 +42,7 @@ export const signIn = async ({ email, password }) => {
 export const verifyEmail = async ({ email, userVerifyCode }) => {
   try {
     const { data } = await axios.post(
-      "http://localhost:1903/api/user/verifyEmail",
+      "http://localhost:1903/api/user/verify-email",
       {
         email,
         userVerifyCode,
@@ -62,7 +62,7 @@ export const verifyEmail = async ({ email, userVerifyCode }) => {
 export const sendEmailAgain = async ({ email }) => {
   try {
     const { data } = await axios.post(
-      "http://localhost:1903/api/user/sendEmailAgain",
+      "http://localhost:1903/api/user/send-email-again",
       {
         email,
       }
@@ -87,9 +87,10 @@ export const getUserProfile = async ({ token }) => {
     };
 
     const { data } = await axios.get(
-      "http://localhost:1903/api/user/getUserById",
+      "http://localhost:1903/api/user/get-user-by-id",
       config
     );
+
     return data;
   } catch (error) {
     if (error.response && error.response.data.message) {
@@ -99,28 +100,3 @@ export const getUserProfile = async ({ token }) => {
     throw new Error(error.message);
   }
 };
-
-// export const deleteUser = async ({ userId, password, token }) => {
-//   try {
-//     const config = {
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//       },
-//     };
-
-//     const { data } = await axios.delete(
-//       "http://localhost:1903/api/user/deleteUser",
-//       {
-//         config,
-//       }
-//     );
-
-//     return data;
-//   } catch (error) {
-//     if (error.response && error.response.data.message) {
-//       throw new Error(error.response.data.message);
-//     }
-
-//     throw new Error(error.message);
-//   }
-// };
