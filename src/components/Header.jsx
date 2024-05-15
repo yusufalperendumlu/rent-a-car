@@ -87,17 +87,16 @@ const NavItem = ({ item }) => {
             <IoIosArrowDown
               className={clsx(
                 "transition-all duration-200 ease-linear mt-0.5 lg:mt-0",
-                curState === true ? "lg:mt-2" : "lg:mt-0",
-                dropDown === true ? "transform rotate-90" : "transform rotate-0"
+                curState === true ? "lg:mt-2" : "lg:mt-0"
               )}
             />
           </p>
           <div
-            className={`lg:hidden transition-all duration-500 pt-4 absolute bottom-0 left-12 transform translate-y-full  w-max lg:group-hover:block z-50 opacity-100 ${
+            className={`lg:hidden transition-all duration-500 pt-4 absolute bottom-0 left-0 transform translate-y-full  w-max lg:group-hover:block z-50 opacity-100 ${
               dropDown === true ? "block" : "hidden"
             } `}
           >
-            <ul className="flex flex-col z-50 bg-dark-hard lg:bg-white shadow-lg rounded-lg overflow-hidden">
+            <ul className="flex flex-col z-50 bg-dark-hardw lg:bg-white shadow-lg rounded-lg overflow-hidden">
               {item.items &&
                 item.items.map((subItem, index) => (
                   <li
@@ -155,7 +154,7 @@ const Header = () => {
     } else {
       setUserProfile(null);
     }
-  });
+  }, []);
 
   const navVisibilityHandler = () => {
     setNavIsVisible((curState) => {
@@ -176,7 +175,7 @@ const Header = () => {
   return (
     <section
       className={clsx(
-        " w-screen h-fit z-50 transition-all bg-dark-red  duration-500 ease-in",
+        " w-screen h-fit z-50 transition-all bg-dark-red duration-500 ease-in",
         scrollPosition > 0 ? "fixed top-0" : "fixed  top-0 left-0 shadow-md"
       )}
     >
@@ -289,7 +288,10 @@ const Header = () => {
         </div>
       </header>
       {LoginIsVisible && !userProfile ? (
-        <div className="fixed top-[4.5rem] left-0 w-full h-full  bg-black opacity-40 -z-40 transition-all duration-500 ease-linear"></div>
+        <div
+          className="fixed top-[4.5rem] left-0 w-full h-full  bg-black opacity-40 -z-40 transition-all duration-500 ease-linear"
+          onClick={loginVisibilityHandler}
+        ></div>
       ) : null}
     </section>
   );

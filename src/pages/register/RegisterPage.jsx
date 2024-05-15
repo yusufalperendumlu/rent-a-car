@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
@@ -17,6 +17,10 @@ const RegisterPage = () => {
   const [isErrorOpen, setIsErrorOpen] = useState(false);
   const [errorText, setErrorText] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "Register";
+  }, []);
 
   const { mutate, isLoading } = useMutation({
     mutationFn: ({ firstname, lastname, email, password }) => {
@@ -238,7 +242,7 @@ const RegisterPage = () => {
                 <input
                   type="checkbox"
                   id="terms"
-                  className="peer h-4 w-4 border-2 border-gray-600 rounded-md  focus:outline-none focus:ring-0 focus:border-blue-600 peer-checked:bg-[#1e656d] peer-checked:border-transparent"
+                  className="peer h-4 w-4 border-2 accent-dark-red border-gray-600 rounded-md  focus:outline-none focus:ring-0 focus:border-blue-600 peer-checked:bg-[#1e656d] peer-checked:border-transparent"
                   {...register("terms", {
                     required: "This field is required.",
                     validate: (value) => value === true,
@@ -252,7 +256,7 @@ const RegisterPage = () => {
                 <input
                   type="checkbox"
                   id="privacy"
-                  className="peer h-4 w-4 border-2 border-gray-600 rounded-md  focus:outline-none focus:ring-0 focus:border-blue-600 peer-checked:bg-[#1e656d] peer-checked:border-transparent"
+                  className="peer h-4 w-4 border-2 accent-dark-red border-gray-600 rounded-md  focus:outline-none focus:ring-0 focus:border-blue-600 peer-checked:bg-[#1e656d] peer-checked:border-transparent"
                   {...register("privacy", {
                     required: "This field is required.",
                     validate: (value) => value === true,
@@ -276,7 +280,7 @@ const RegisterPage = () => {
                 <input
                   type="checkbox"
                   id="marketing"
-                  className="peer h-4 w-4 border-2 border-gray-600 rounded-md  focus:outline-none focus:ring-0 focus:border-blue-600 peer-checked:bg-[#1e656d] peer-checked:border-transparent"
+                  className="peer h-4 w-4 border-2 accent-dark-red border-gray-600 rounded-md  focus:outline-none focus:ring-0 focus:border-blue-600 peer-checked:bg-[#1e656d] peer-checked:border-transparent"
                   {...register("marketing", {
                     required: "This field is required.",
                     validate: (value) => value === true,

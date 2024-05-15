@@ -32,8 +32,9 @@ const Login = () => {
         icon: "success",
         title: "Login Successful",
         text: "You have successfully logged in",
+      }).then(() => {
+        navigate("/");
       });
-      navigate("/");
     },
     onError: (error) => {
       Swal.fire({

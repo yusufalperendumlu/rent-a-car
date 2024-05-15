@@ -23,6 +23,7 @@ const VerifyEmailPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    document.title = "Verify Email";
     const emailFromStorage = getEmailFromLocalStorage();
     setUserEmail(emailFromStorage);
   }, []);
