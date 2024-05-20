@@ -100,3 +100,27 @@ export const getUserProfile = async ({ token }) => {
     throw new Error(error.message);
   }
 };
+
+export const deleteUser = async ({ email, token }) => {
+  try {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const { data } = await axios.delete(
+      `http://localhost:1903/api/user/delete-user`,
+      config,
+      email
+    );
+
+    return data;
+  } catch (error) {
+    if (error.response && error.response.data.message) {
+      throw new Error(error.response.data.message);
+    }
+
+    throw new Error(error.message);
+  }
+};

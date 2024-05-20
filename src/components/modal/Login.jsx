@@ -1,15 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import { IoIosArrowDown, IoIosEye, IoIosEyeOff } from "react-icons/io";
 import clsx from "clsx";
 
 import { signIn } from "@/services/index/users";
-import { useForm } from "react-hook-form";
+
 import Swal from "sweetalert2";
+import { userActions } from "@/store/reducers/userReducers";
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispacth = useDispatch();
+  const userState = useSelector((state) => state.user);
 
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
@@ -27,13 +32,12 @@ const Login = () => {
       return signIn({ email, password });
     },
     onSuccess: (data) => {
+      dispacth(userActions.setUserInfo(data));
       localStorage.setItem("account", JSON.stringify(data));
       Swal.fire({
         icon: "success",
         title: "Login Successful",
         text: "You have successfully logged in",
-      }).then(() => {
-        navigate("/");
       });
     },
     onError: (error) => {
@@ -46,11 +50,16 @@ const Login = () => {
     },
   });
 
+  useEffect(() => {
+    if (userState.userInfo) {
+      navigate("/");
+    }
+  }, [navigate, userState.userInfo]);
+
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
-    // reset,
   } = useForm({
     defaultValues: {
       email: "",
@@ -90,7 +99,8 @@ const Login = () => {
               {...register("email", {
                 required: "Email is required",
                 pattern: {
-                  value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/,
+                  value:
+                    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                   message: "Invalid email format",
                 },
               })}

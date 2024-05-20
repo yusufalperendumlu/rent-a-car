@@ -6,6 +6,7 @@ import RegisterPage from "@/pages/register/RegisterPage";
 import ProfilePage from "@/pages/profile/ProfilePage";
 import CarsShow from "@/pages/carsShow/CarsShow";
 import VerifyEmailPage from "@/pages/verify/VerifyEmailPage";
+import UserDeletePage from "./pages/userDelete/UserDeletePage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/verifyEmail" element={<VerifyEmailPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/listcars/:officename" element={<CarsShow />} />
+          <Route path="/userDelete" element={<UserDeletePage />} />
         </Routes>
       </div>
     </>
