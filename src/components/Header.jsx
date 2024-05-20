@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { getUserProfile } from "@/services/index/users";
 import { IoIosArrowDown } from "react-icons/io";
@@ -6,6 +7,7 @@ import { AiOutlineMenu, AiOutlineClose, AiOutlineLogin } from "react-icons/ai";
 import { clsx } from "clsx";
 
 import Login from "@/components/modal/Login";
+import { logout } from "@/store/actions/user";
 
 const NavItemInfo = [
   {
@@ -124,11 +126,12 @@ const NavItem = ({ item }) => {
 
 const Header = () => {
   const navigate = useNavigate();
+  const dispacth = useDispatch();
+  const userState = useSelector((state) => state.user);
   const [profileDropdown, setProfileDropdown] = useState(false);
   const [navIsVisible, setNavIsVisible] = useState(false);
   const [LoginIsVisible, setLoginIsVisible] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [userProfile, setUserProfile] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -138,23 +141,6 @@ const Header = () => {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [scrollPosition]);
-
-  useEffect(() => {
-    const token = localStorage.getItem("account")
-      ? JSON.parse(localStorage.getItem("account")).token
-      : null;
-    if (token) {
-      getUserProfile({ token: token })
-        .then((profile) => {
-          setUserProfile(profile);
-        })
-        .catch((error) => {
-          console.error("Error fetching user profile:", error);
-        });
-    } else {
-      setUserProfile(null);
-    }
-  }, []);
 
   const navVisibilityHandler = () => {
     setNavIsVisible((curState) => {
@@ -169,7 +155,8 @@ const Header = () => {
   };
 
   const logoutHandler = () => {
-    localStorage.removeItem("account");
+    dispacth(logout());
+    setLoginIsVisible(false);
   };
 
   return (
@@ -217,7 +204,7 @@ const Header = () => {
               <div className="flex">
                 <span className="px-4 flex items-center justify-center">|</span>
 
-                {userProfile && userProfile.data ? (
+                {userState.userInfo ? (
                   <div className="text-white items-center gap-y-5 lg:text-dark-soft flex flex-col lg:flex-row gap-x-3 font-semibold">
                     <div className="relative group">
                       <div className="flex flex-col items-center">
@@ -277,7 +264,7 @@ const Header = () => {
                     </span>
                   </button>
                 )}
-                {!userProfile && (
+                {!userState.userInfo && (
                   <div className="absolute hidden top-14 right-0 lg:block group-hover">
                     {LoginIsVisible && <Login />}
                   </div>
@@ -287,7 +274,7 @@ const Header = () => {
           </ul>
         </div>
       </header>
-      {LoginIsVisible && !userProfile ? (
+      {LoginIsVisible && !userState.userInfo ? (
         <div
           className="fixed top-[4.5rem] left-0 w-full h-full  bg-black opacity-40 -z-40 transition-all duration-500 ease-linear"
           onClick={loginVisibilityHandler}
