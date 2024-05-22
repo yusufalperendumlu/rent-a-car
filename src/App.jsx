@@ -6,7 +6,8 @@ import RegisterPage from "@/pages/register/RegisterPage";
 import ProfilePage from "@/pages/profile/ProfilePage";
 import CarsShow from "@/pages/carsShow/CarsShow";
 import VerifyEmailPage from "@/pages/verify/VerifyEmailPage";
-import UserDeletePage from "./pages/userDelete/UserDeletePage";
+import UserDeletePage from "@/pages/userDelete/UserDeletePage";
+import ForgotMyPasswordPage from "@/pages/forgotMyPassword/ForgotMyPasswordPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/listcars/:officename" element={<CarsShow />} />
           <Route path="/userDelete" element={<UserDeletePage />} />
+          <Route path="/forgotMyPassword" element={<ForgotMyPasswordPage />} />
         </Routes>
       </div>
     </>
