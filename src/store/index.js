@@ -10,7 +10,6 @@ const initialState = {
   user: { userInfo: userInfoFromStorage },
 };
 
-
 const store = configureStore({
   reducer: {
     user: userReducer,

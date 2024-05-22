@@ -180,7 +180,7 @@ const Login = () => {
                 href="/"
                 className="text-xs font-light text-gray-200  transition-all duration-300 ease-in-out"
               >
-                Forgot My Password?
+                Forgot my password?
               </a>
               <IoIosArrowDown className="rotate-[270deg] text-gray-200 text-sm ml-2" />
             </div>
