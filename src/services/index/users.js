@@ -132,8 +132,15 @@ export const updateUserProfile = async ({
   currentPassword,
   newPassword,
   newPasswordAgain,
+  token,
 }) => {
   try {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
     const { data } = await axios.put(
       "http://localhost:1903/api/user/update-user",
       {
@@ -143,7 +150,25 @@ export const updateUserProfile = async ({
         currentPassword,
         newPassword,
         newPasswordAgain,
+        config,
       }
+    );
+
+    return data;
+  } catch (error) {
+    if (error.response && error.response.data.message) {
+      throw new Error(error.response.data.message);
+    }
+
+    throw new Error(error.message);
+  }
+};
+
+export const forgotMyPassword = async ({ email }) => {
+  try {
+    const { data } = await axios.post(
+      "http://localhost:1903/api/user/i-forgot-my-password",
+      { email }
     );
 
     return data;
