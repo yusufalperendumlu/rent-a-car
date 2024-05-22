@@ -10,8 +10,6 @@ const initialState = {
   user: { userInfo: userInfoFromStorage },
 };
 
-console.log(initialState);
-
 const store = configureStore({
   reducer: {
     user: userReducer,
