@@ -77,28 +77,18 @@ const ProfilePage = () => {
     watch,
   } = useForm({
     defaultValues: {
-      firstname: "",
-      lastname: "",
-      email: "",
+      firstname: profileIsLoading ? "" : profileData?.data?.firstname,
+      lastname: profileIsLoading ? "" : profileData?.data?.lastname,
+      email: profileIsLoading ? "" : profileData?.data?.email,
       currentPassword: "",
       newPassword: "",
       newPasswordAgain: "",
     },
-    values: useMemo(() => {
-      return {
-        firstname: profileIsLoading ? "" : profileData?.data?.firstname,
-        lastname: profileIsLoading ? "" : profileData?.data?.lastname,
-        email: profileIsLoading ? "" : profileData?.data?.email,
-      };
-    }, [
-      profileData?.data.firstname,
-      profileData?.data.lastname,
-      profileData?.data.email,
-      profileIsLoading,
-    ]),
 
     mode: "onChange",
   });
+
+  // TODO bu sayfaya tekrar bakılacak backend de sorun var.
 
   const submitHandler = (data) => {
     const {
