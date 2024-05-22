@@ -91,7 +91,7 @@ const Hero = () => {
       <div className="w-fit lg:ml-2 lg:1/2 flex items-center  justify-end flex-wrap flex-col lg:mt-0 z-40">
         <div className="px-2 py-3 pr-8 bg-dark-light">
           <div className="text-nowrap text-white px-4">
-            <h1>Make Your Trip</h1>
+            <h1>Make your trip</h1>
           </div>
           <div className="flex items-center justify-between py-4 px-2">
             <div className=" text-white flex flex-wrap px-4">
