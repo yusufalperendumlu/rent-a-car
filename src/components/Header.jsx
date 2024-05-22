@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { getUserProfile } from "@/services/index/users";
+import { Link } from "react-router-dom";
 import { IoIosArrowDown } from "react-icons/io";
+import { MdOutlineAccountCircle } from "react-icons/md";
 import { AiOutlineMenu, AiOutlineClose, AiOutlineLogin } from "react-icons/ai";
 import { clsx } from "clsx";
 
@@ -98,13 +98,10 @@ const NavItem = ({ item }) => {
               dropDown === true ? "block" : "hidden"
             } `}
           >
-            <ul className="flex flex-col z-50 bg-dark-hardw lg:bg-white shadow-lg rounded-lg overflow-hidden">
+            <ul className="flex flex-col z-50 bg-dark-hard lg:bg-white shadow-lg rounded-lg overflow-hidden">
               {item.items &&
                 item.items.map((subItem, index) => (
-                  <li
-                    key={index}
-                    className="border-b-[0.75px] border-slate-300"
-                  >
+                  <li key={index} className=" border-slate-300">
                     <a
                       href={subItem.link}
                       className="block px-4 py-2 text-dark-soft hover:bg-dark-soft hover:text-white transition-all duration-300 "
@@ -125,7 +122,6 @@ const NavItem = ({ item }) => {
 };
 
 const Header = () => {
-  const navigate = useNavigate();
   const dispacth = useDispatch();
   const userState = useSelector((state) => state.user);
   const [profileDropdown, setProfileDropdown] = useState(false);
@@ -208,23 +204,26 @@ const Header = () => {
                   <div className="text-white items-center gap-y-5 lg:text-dark-soft flex flex-col lg:flex-row gap-x-3 font-semibold">
                     <div className="relative group">
                       <div className="flex flex-col items-center">
-                        <p className="flex cursor-pointer gap-x-1 border-none items-center  mt-5 lg:mt-0  px-6 py-2 rounded-full text-white font-semibold hover:bg-dark-red hover:text-white transition-all duration-300">
-                          <span>Account</span>
+                        <p className="flex cursor-pointer gap-x-3 border-none items-center  mt-5 lg:mt-0  px-6 py-2 rounded-full text-white font-semibold hover:bg-dark-red hover:text-white transition-all duration-300">
+                          <MdOutlineAccountCircle className="w-6 h-6" />
+
+                          <span>
+                            Welcome, {` ${userState.userInfo.data.firstname}`}
+                          </span>
                         </p>
                         <div
                           className={clsx(
-                            "lg:hidden transition-all duration-500 pt-4 absolute bottom-0 right-0 transform translate-y-full  w-max lg:group-hover:block z-50 opacity-100",
+                            "lg:hidden transition-all duration-500 pt-4 absolute bottom-0 left-0 transform translate-y-full  w-[100%] lg:group-hover:block z-50 opacity-100",
                             profileDropdown ? "hidden" : "block"
                           )}
                         >
                           <ul className="flex flex-col z-50 bg-dark-hard lg:bg-white shadow-lg rounded-lg overflow-hidden ">
-                            <button
-                              type="button"
-                              onClick={() => navigate("/profile")}
-                              className="hover:bg-dark-hard hover:text-white px-4 py-2 text-white lg:text-dark-hard"
+                            <Link
+                              to={"/profile"}
+                              className="hover:bg-dark-hard flex items-center justify-center hover:text-white px-4 py-2 text-white lg:text-dark-hard"
                             >
                               Profile Page
-                            </button>
+                            </Link>
                             <button
                               onClick={logoutHandler}
                               type="button"
