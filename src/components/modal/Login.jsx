@@ -176,12 +176,12 @@ const Login = () => {
               </label>
             </div>
             <div className="flex justify-end">
-              <a
-                href="/"
+              <Link
+                to={"/forgotMyPassword"}
                 className="text-xs font-light text-gray-200  transition-all duration-300 ease-in-out"
               >
                 Forgot my password?
-              </a>
+              </Link>
               <IoIosArrowDown className="rotate-[270deg] text-gray-200 text-sm ml-2" />
             </div>
           </div>
