@@ -124,3 +124,34 @@ export const deleteUser = async ({ email, token }) => {
     throw new Error(error.message);
   }
 };
+
+export const updateUserProfile = async ({
+  firstname,
+  lastname,
+  email,
+  currentPassword,
+  newPassword,
+  newPasswordAgain,
+}) => {
+  try {
+    const { data } = await axios.put(
+      "http://localhost:1903/api/user/update-user",
+      {
+        firstname,
+        lastname,
+        email,
+        currentPassword,
+        newPassword,
+        newPasswordAgain,
+      }
+    );
+
+    return data;
+  } catch (error) {
+    if (error.response && error.response.data.message) {
+      throw new Error(error.response.data.message);
+    }
+
+    throw new Error(error.message);
+  }
+};
