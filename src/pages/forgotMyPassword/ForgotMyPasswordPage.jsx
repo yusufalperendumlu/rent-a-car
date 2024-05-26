@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import { userActions } from "@/store/reducers/userReducers";
 
 import { forgotMyPassword } from "@/services/index/users";
 
@@ -10,11 +12,15 @@ import { images } from "@/constants";
 import MainLayout from "@/components/MainLayout";
 
 const ForgotMyPasswordPage = () => {
+  const dispacth = useDispatch();
+
   const { mutate, isLoading } = useMutation({
     mutationFn: ({ email }) => {
       return forgotMyPassword({ email });
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
+      dispacth(userActions.setUserInfo({ data }));
+      localStorage.setItem("account", JSON.stringify(data));
       Swal.fire({
         icon: "success",
         title: "Email sent",

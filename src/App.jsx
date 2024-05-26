@@ -8,6 +8,7 @@ import CarsShow from "@/pages/carsShow/CarsShow";
 import VerifyEmailPage from "@/pages/verify/VerifyEmailPage";
 import UserDeletePage from "@/pages/userDelete/UserDeletePage";
 import ForgotMyPasswordPage from "@/pages/forgotMyPassword/ForgotMyPasswordPage";
+import ResetPassword from "./pages/resetPassword/ResetPassword";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/listcars/:officename" element={<CarsShow />} />
           <Route path="/userDelete" element={<UserDeletePage />} />
           <Route path="/forgotMyPassword" element={<ForgotMyPasswordPage />} />
+          <Route path="/resetPassword" element={<ResetPassword />} />
         </Routes>
       </div>
     </>

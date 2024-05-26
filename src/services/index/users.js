@@ -180,3 +180,25 @@ export const forgotMyPassword = async ({ email }) => {
     throw new Error(error.message);
   }
 };
+
+export const resetPassword = async ({ id, password, passwordAgain }) => {
+  try {
+    console.log("Payload sent to server: ", {
+      id,
+      password,
+      passwordAgain,
+    });
+    const { data } = await axios.post(
+      "http://localhost:1903/api/user/reset-password",
+      { id, password, passwordAgain }
+    );
+
+    return data;
+  } catch (error) {
+    if (error.response && error.response.data.message) {
+      throw new Error(error.response.data.message);
+    }
+
+    throw new Error(error.message);
+  }
+};
