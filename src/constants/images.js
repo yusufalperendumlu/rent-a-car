@@ -11,6 +11,7 @@ import LuigiGuido from "@/assets/LuigiGuido8.jpg";
 import LuigiGuido2 from "@/assets/LuigiGuido10.jpg";
 import Cars2England from "@/assets/c2_credits.jpg";
 import McQueen2 from "@/assets/Lightning_05.jpg";
+import Racer from "@/assets/Racers4.jpg";
 
 const images = {
   LogoImage,
@@ -26,6 +27,7 @@ const images = {
   LuigiGuido2,
   Cars2England,
   McQueen2,
+  Racer,
 };
 
 export default images;
